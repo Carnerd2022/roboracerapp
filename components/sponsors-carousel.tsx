@@ -1,38 +1,36 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-// Edit this list anytime — sponsors update instantly
-// Later when you have logo images, we can swap the text for <Image> tags
+// Each sponsor has a name + the logo file in public/sponsors/
 const sponsors = [
-  "Citrix",
-  "Salesforce",
-  "Eclat Prime",
-  "RISE Foundation",
-  "Visa",
-  "Altair",
-  "Costco",
-  "PG&E",
-  "Quantum Robotics",
-  "NVIDIA",
-  "Prusa Research",
-  "Automation Anywhere",
-  "GoBilda",
-  "Walmart Labs",
-  "KLA",
-  "Polymaker",
+  { name: "Citrix", logo: "/sponsors/citrix.png" },
+  { name: "Salesforce", logo: "/sponsors/salesforce.png" },
+  { name: "Eclat Prime", logo: "/sponsors/eclat-prime.png" },
+  { name: "RISE Foundation", logo: "/sponsors/rise-foundation.png" },
+  { name: "Visa", logo: "/sponsors/visa.png" },
+  { name: "Altair", logo: "/sponsors/altair.png" },
+  { name: "Costco", logo: "/sponsors/costco.png" },
+  { name: "PG&E", logo: "/sponsors/pge.png" },
+  { name: "Quantum Robotics", logo: "/sponsors/quantum-robotics.png" },
+  { name: "NVIDIA", logo: "/sponsors/nvidia.png" },
+  { name: "Prusa Research", logo: "/sponsors/prusa-research.png" },
+  { name: "Automation Anywhere", logo: "/sponsors/automation-anywhere.png" },
+  { name: "GoBilda", logo: "/sponsors/gobilda.png" },
+  { name: "Walmart Labs", logo: "/sponsors/walmart-labs.png" },
+  { name: "KLA", logo: "/sponsors/kla.png" },
+  { name: "Polymaker", logo: "/sponsors/polymaker.png" },
 ];
 
 export function SponsorsCarousel() {
-  // Duplicate the array so the scroll loops seamlessly
   const looped = [...sponsors, ...sponsors];
 
   return (
     <section className="relative py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 mb-12">
-        {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,7 +44,6 @@ export function SponsorsCarousel() {
           </span>
         </motion.div>
 
-        {/* Section heading */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -71,27 +68,30 @@ export function SponsorsCarousel() {
         </div>
       </div>
 
-      {/* Auto-scrolling carousel */}
       <div className="relative">
-        {/* Gradient fades on left and right edges */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
         <div className="flex gap-4 animate-scroll">
           {looped.map((sponsor, index) => (
             <div
-              key={`${sponsor}-${index}`}
-              className="flex-shrink-0 w-[240px] h-[100px] rounded-lg border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black flex items-center justify-center px-6 hover:border-purple-500 transition-colors group"
+              key={`${sponsor.name}-${index}`}
+              className="flex-shrink-0 w-[240px] h-[120px] rounded-lg border border-purple-900/50 bg-white/95 flex items-center justify-center px-8 hover:border-purple-500 hover:bg-white transition-all group"
             >
-              <div className="font-display text-lg text-purple-200/80 group-hover:text-white transition-colors tracking-wide text-center">
-                {sponsor}
+              <div className="relative w-full h-full flex items-center justify-center">
+                <Image
+                  src={sponsor.logo}
+                  alt={sponsor.name}
+                  fill
+                  className="object-contain p-4"
+                  sizes="240px"
+                />
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* "Become a sponsor" CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

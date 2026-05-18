@@ -1,26 +1,27 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Handshake, Heart, Sparkles, Mail, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 
 const sponsors = [
-  "Citrix",
-  "Salesforce",
-  "Eclat Prime",
-  "RISE Foundation",
-  "Visa",
-  "Altair",
-  "Costco",
-  "PG&E",
-  "Quantum Robotics",
-  "NVIDIA",
-  "Prusa Research",
-  "Automation Anywhere",
-  "GoBilda",
-  "Walmart Labs",
-  "KLA",
-  "Polymaker",
+  { name: "Citrix", logo: "/sponsors/citrix.png" },
+  { name: "Salesforce", logo: "/sponsors/salesforce.png" },
+  { name: "Eclat Prime", logo: "/sponsors/eclat-prime.png" },
+  { name: "RISE Foundation", logo: "/sponsors/rise-foundation.png" },
+  { name: "Visa", logo: "/sponsors/visa.png" },
+  { name: "Altair", logo: "/sponsors/altair.png" },
+  { name: "Costco", logo: "/sponsors/costco.png" },
+  { name: "PG&E", logo: "/sponsors/pge.png" },
+  { name: "Quantum Robotics", logo: "/sponsors/quantum-robotics.png" },
+  { name: "NVIDIA", logo: "/sponsors/nvidia.png" },
+  { name: "Prusa Research", logo: "/sponsors/prusa-research.png" },
+  { name: "Automation Anywhere", logo: "/sponsors/automation-anywhere.png" },
+  { name: "GoBilda", logo: "/sponsors/gobilda.png" },
+  { name: "Walmart Labs", logo: "/sponsors/walmart-labs.png" },
+  { name: "KLA", logo: "/sponsors/kla.png" },
+  { name: "Polymaker", logo: "/sponsors/polymaker.png" },
 ];
 
 export default function SponsorsPage() {
@@ -58,12 +59,18 @@ export default function SponsorsPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {sponsors.map((sponsor) => (
               <div
-                key={sponsor}
-                className="relative p-6 h-[100px] rounded-lg border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black flex items-center justify-center hover:border-purple-500 transition-all"
+                key={sponsor.name}
+                className="relative h-[140px] rounded-lg border border-purple-900/50 bg-white/95 flex items-center justify-center p-6 hover:border-purple-500 hover:bg-white hover:shadow-xl hover:shadow-purple-500/20 transition-all group"
               >
-                <span className="font-display text-base lg:text-lg text-purple-200/80 hover:text-white transition-colors tracking-wide text-center">
-                  {sponsor}
-                </span>
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    fill
+                    className="object-contain p-2"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                </div>
               </div>
             ))}
           </div>
