@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Newspaper, Wrench, Trophy, Lightbulb, Users, Calendar, ArrowRight, Clock } from "lucide-react";
+import { Newspaper, Wrench, Trophy, Lightbulb, Users, Calendar, Clock } from "lucide-react";
 
 const upcomingCategories = [
   {
@@ -69,44 +68,10 @@ export default function BlogPage() {
           <span className="block text-purple-400 glow-purple">pit wall.</span>
         </h1>
 
-        <p className="text-lg lg:text-xl text-purple-100/70 max-w-3xl leading-relaxed mb-16">
+        <p className="text-lg lg:text-xl text-purple-100/70 max-w-3xl leading-relaxed mb-24">
           Build logs, deep dives, season recaps, and lessons from the bench. Our team blog is being prepped — first posts dropping soon.
         </p>
 
-        {/* Coming Soon banner */}
-        <div className="relative rounded-xl overflow-hidden border border-purple-500 mb-24">
-          <div className="absolute inset-0 carbon-fiber opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-950/60 via-purple-900/40 to-black" />
-
-          <div className="relative p-10 lg:p-14">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500" />
-              </span>
-              <span className="font-mono text-[11px] tracking-[0.3em] text-purple-300 uppercase">
-                Status: Coming Soon
-              </span>
-            </div>
-
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4 max-w-3xl">
-              In the garage. Almost on the grid.
-            </h2>
-            <p className="text-purple-100/80 max-w-2xl leading-relaxed mb-8">
-              We&apos;re putting the finishing touches on our team blog. First posts are scheduled for the upcoming DECODE season — build logs every week, deep dives on our software stack, and full recaps after every competition. Subscribe via email and we&apos;ll send you the first post.
-            </p>
-
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-md transition-all hover:shadow-xl hover:shadow-purple-500/50"
-            >
-              Get notified when we launch
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Categories preview */}
         <div className="mb-24">
           <div className="flex items-center gap-3 mb-4">
             <Newspaper size={16} className="text-purple-400" />
@@ -153,7 +118,6 @@ export default function BlogPage() {
           </div>
         </div>
 
-        {/* Teaser posts (locked) */}
         <div>
           <div className="flex items-center gap-3 mb-4">
             <Clock size={16} className="text-purple-400" />

@@ -1,18 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Cpu, Weight, Ruler, Zap } from "lucide-react";
+import { ArrowRight, Cpu, Ruler, Zap } from "lucide-react";
 
-// Edit these specs anytime — they appear on the homepage robot card
 const robotSpecs = {
   name: "OUR ROBOT",
   season: "DECODE 2025-2026",
-  weight: "TBD",
   dimensions: '18" × 18" × 18"',
   drivetrain: "Mecanum 4WD",
   language: "Java / FTC SDK",
-  status: "COMPETITION READY",
 };
 
 export function RobotHighlight() {
@@ -56,30 +54,23 @@ export function RobotHighlight() {
               className="absolute inset-0 carbon-fiber"
               style={{ filter: "brightness(0.4)" }}
             />
-
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.3),transparent_70%)]" />
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-              <div className="w-20 h-20 rounded-full border-2 border-purple-500 flex items-center justify-center mb-4 bg-black/40 backdrop-blur-sm">
-                <Cpu size={32} className="text-purple-400" />
-              </div>
-              <p className="font-display text-2xl text-white mb-2">
-                {robotSpecs.name}
-              </p>
-              <p className="font-mono text-[10px] tracking-[0.2em] text-purple-400">
-                ROBOT IMAGE PLACEHOLDER
-              </p>
-              <p className="font-mono text-[10px] text-purple-300/60 mt-1">
-                Drop CAD render or photo here
-              </p>
-            </div>
+            {/* Robot render — replace placeholder when you add public/robot-render.png */}
+            <Image
+              src="/robot-render.png"
+              alt="Our DECODE robot"
+              fill
+              className="object-contain p-12 relative z-10"
+              priority
+            />
 
-            <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-purple-400" />
-            <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-purple-400" />
-            <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-purple-400" />
-            <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-purple-400" />
+            <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-purple-400 z-20" />
+            <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-purple-400 z-20" />
+            <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-purple-400 z-20" />
+            <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-purple-400 z-20" />
 
-            <div className="absolute top-6 right-12 flex items-center gap-2 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/50">
+            <div className="absolute top-6 right-12 z-20 flex items-center gap-2 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/50">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
               <span className="font-mono text-[9px] text-green-400 tracking-wider">
                 LIVE
@@ -109,8 +100,7 @@ export function RobotHighlight() {
               season&apos;s game.
             </p>
 
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              <SpecCard icon={Weight} label="WEIGHT" value={robotSpecs.weight} />
+            <div className="grid grid-cols-3 gap-3 mb-8">
               <SpecCard
                 icon={Ruler}
                 label="DIMENSIONS"

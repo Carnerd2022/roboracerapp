@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Cpu,
-  Weight,
   Ruler,
   Zap,
   Target,
@@ -13,13 +14,13 @@ import {
   Boxes,
   Wind,
   ArrowRight,
+  ChevronDown,
+  Archive,
 } from "lucide-react";
 
-// Robot specs — same source of truth as homepage
 const robotSpecs = {
   name: "OUR ROBOT",
   season: "DECODE 2025-2026",
-  weight: "TBD",
   dimensions: '18" × 18" × 18"',
   drivetrain: "Mecanum 4WD",
   language: "Java / FTC SDK",
@@ -40,11 +41,7 @@ const subsystems = [
     tagline: "Full 360° tracking",
     description:
       "Ball-bearing integrated shooting system driven by a motor for 360° motion. Smooth turns and precise aim with fully 3D-printed custom gear teeth for accurate turning.",
-    highlights: [
-      "Ball-bearing integrated",
-      "360° motion",
-      "Custom 3D-printed gears",
-    ],
+    highlights: ["Ball-bearing integrated", "360° motion", "Custom 3D-printed gears"],
   },
   {
     icon: Wind,
@@ -79,13 +76,55 @@ const goals = [
   "Adaptive robot",
 ];
 
+// Past robots — edit these as you build new ones
+// Drop CAD renders into public/robots/decode.png, into-the-deep.png, etc.
+const pastRobots = [
+  {
+    season: "DECODE",
+    year: "2025-2026",
+    image: "/robots/decode.png",
+    status: "Current Season",
+    summary:
+      "Our DECODE robot features 5 custom subsystems — adjustable deposit hood, ball-bearing turret, high-capacity intake, sub-second transfer, and a vectoring system for smart artifact routing.",
+    highlights: ["5 subsystems", "Real-time SLAM", "Sub-0.7s cycle"],
+  },
+  {
+    season: "INTO THE DEEP",
+    year: "2024-2025",
+    image: "/robots/into-the-deep.png",
+    status: "Past Season",
+    summary:
+      "Our INTO THE DEEP robot focused on sample collection and specimen scoring. Built around a precise scoring arm and a fast intake system that could handle both game pieces seamlessly.",
+    highlights: ["Scoring arm", "Dual game-piece handling", "Think Award winner"],
+  },
+  {
+    season: "CENTERSTAGE",
+    year: "2023-2024",
+    image: "/robots/centerstage.png",
+    status: "Past Season",
+    summary:
+      "Our CENTERSTAGE robot stacked pixels with precision using a custom linear slide system. Tuned for fast cycle times and reliable autonomous routines that put pixels exactly where we needed them.",
+    highlights: ["Linear slides", "Pixel stacking", "Fast autonomous"],
+  },
+  {
+    season: "POWER PLAY",
+    year: "2022-2023",
+    image: "/robots/power-play.png",
+    status: "Past Season",
+    summary:
+      "Our POWER PLAY robot was built for vertical reach and cone manipulation. Took home Finalist Alliance Captain and the Inspire Award at the East Bay League Tournament that season.",
+    highlights: ["Telescoping lift", "Cone manipulation", "Inspire Award"],
+  },
+];
+
 export default function RobotPage() {
+  const [openSeason, setOpenSeason] = useState<number | null>(0);
+
   return (
     <div className="relative min-h-screen pt-32 pb-24">
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Page header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,7 +159,7 @@ export default function RobotPage() {
           <span className="text-purple-300 font-medium">DECODE</span> machine.
         </motion.p>
 
-        {/* Big CAD render area */}
+        {/* Big CAD render area — uses /robot-render.png if available */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -128,35 +167,23 @@ export default function RobotPage() {
           transition={{ duration: 0.7 }}
           className="relative aspect-[16/10] lg:aspect-[16/8] rounded-xl overflow-hidden border border-purple-900/50 mb-20"
         >
-          <div
-            className="absolute inset-0 carbon-fiber"
-            style={{ filter: "brightness(0.4)" }}
-          />
+          <div className="absolute inset-0 carbon-fiber" style={{ filter: "brightness(0.4)" }} />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.3),transparent_70%)]" />
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-            <div className="w-24 h-24 rounded-full border-2 border-purple-500 flex items-center justify-center mb-6 bg-black/40 backdrop-blur-sm">
-              <Cpu size={40} className="text-purple-400" />
-            </div>
-            <p className="font-display text-3xl text-white mb-2">
-              {robotSpecs.name}
-            </p>
-            <p className="font-mono text-[11px] tracking-[0.3em] text-purple-400 mb-1">
-              CAD RENDER PLACEHOLDER
-            </p>
-            <p className="font-mono text-[10px] text-purple-300/60">
-              Drop your robot CAD render or photo here
-            </p>
-          </div>
+          <Image
+            src="/robot-render.png"
+            alt="DECODE CAD render"
+            fill
+            className="object-contain p-12 relative z-10"
+            priority
+          />
 
-          {/* HUD corners */}
-          <div className="absolute top-6 left-6 w-8 h-8 border-l-2 border-t-2 border-purple-400" />
-          <div className="absolute top-6 right-6 w-8 h-8 border-r-2 border-t-2 border-purple-400" />
-          <div className="absolute bottom-6 left-6 w-8 h-8 border-l-2 border-b-2 border-purple-400" />
-          <div className="absolute bottom-6 right-6 w-8 h-8 border-r-2 border-b-2 border-purple-400" />
+          <div className="absolute top-6 left-6 w-8 h-8 border-l-2 border-t-2 border-purple-400 z-20" />
+          <div className="absolute top-6 right-6 w-8 h-8 border-r-2 border-t-2 border-purple-400 z-20" />
+          <div className="absolute bottom-6 left-6 w-8 h-8 border-l-2 border-b-2 border-purple-400 z-20" />
+          <div className="absolute bottom-6 right-6 w-8 h-8 border-r-2 border-b-2 border-purple-400 z-20" />
 
-          {/* Status pill */}
-          <div className="absolute top-6 right-1/2 translate-x-1/2 flex items-center gap-2 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-full border border-green-500/50">
+          <div className="absolute top-6 right-1/2 translate-x-1/2 z-20 flex items-center gap-2 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-full border border-green-500/50">
             <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
             <span className="font-mono text-[10px] text-green-400 tracking-wider">
               COMPETITION READY
@@ -164,29 +191,20 @@ export default function RobotPage() {
           </div>
         </motion.div>
 
-        {/* Spec strip */}
+        {/* Spec strip — no weight, 3 cards now */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-32"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-32"
         >
-          <SpecCard icon={Weight} label="WEIGHT" value={robotSpecs.weight} />
-          <SpecCard
-            icon={Ruler}
-            label="DIMENSIONS"
-            value={robotSpecs.dimensions}
-          />
-          <SpecCard
-            icon={Zap}
-            label="DRIVETRAIN"
-            value={robotSpecs.drivetrain}
-          />
+          <SpecCard icon={Ruler} label="DIMENSIONS" value={robotSpecs.dimensions} />
+          <SpecCard icon={Zap} label="DRIVETRAIN" value={robotSpecs.drivetrain} />
           <SpecCard icon={Cpu} label="STACK" value={robotSpecs.language} />
         </motion.div>
 
-        {/* Design goals section */}
+        {/* Design goals */}
         <div className="mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -225,16 +243,14 @@ export default function RobotPage() {
                 <div className="font-mono text-[10px] text-purple-500/70 mb-3">
                   0{index + 1}
                 </div>
-                <p className="font-display text-base text-white leading-tight">
-                  {goal}
-                </p>
+                <p className="font-display text-base text-white leading-tight">{goal}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Subsystems section */}
-        <div className="mb-20">
+        {/* Subsystems */}
+        <div className="mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -269,7 +285,6 @@ export default function RobotPage() {
             designed, prototyped, and tuned for this season&apos;s challenge.
           </motion.p>
 
-          {/* Subsystem cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {subsystems.map((sys, index) => {
               const Icon = sys.icon;
@@ -282,20 +297,14 @@ export default function RobotPage() {
                   transition={{ duration: 0.6, delay: 0.1 * index }}
                   className="group relative p-7 rounded-lg bg-gradient-to-br from-purple-950/40 to-black border border-purple-900/50 hover:border-purple-500 transition-all overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20"
                 >
-                  {/* Number */}
                   <div className="absolute top-4 right-4 font-mono text-[10px] text-purple-500/60 tracking-wider">
                     0{index + 1} / 0{subsystems.length}
                   </div>
 
-                  {/* Icon */}
                   <div className="relative w-12 h-12 rounded-md bg-purple-900/40 border border-purple-700/50 flex items-center justify-center mb-5 group-hover:bg-purple-600 group-hover:border-purple-400 transition-all">
-                    <Icon
-                      size={20}
-                      className="text-purple-300 group-hover:text-white transition-colors"
-                    />
+                    <Icon size={20} className="text-purple-300 group-hover:text-white transition-colors" />
                   </div>
 
-                  {/* Name */}
                   <h3 className="font-display text-2xl font-bold text-white tracking-wider mb-1">
                     {sys.name}
                   </h3>
@@ -303,12 +312,10 @@ export default function RobotPage() {
                     {sys.tagline}
                   </p>
 
-                  {/* Description */}
                   <p className="text-purple-100/70 leading-relaxed text-sm mb-5">
                     {sys.description}
                   </p>
 
-                  {/* Highlights */}
                   <div className="flex flex-wrap gap-1.5">
                     {sys.highlights.map((h) => (
                       <span
@@ -320,7 +327,6 @@ export default function RobotPage() {
                     ))}
                   </div>
 
-                  {/* Bottom racing stripe */}
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-purple-500 to-purple-700 transition-all duration-700" />
                 </motion.div>
               );
@@ -328,7 +334,120 @@ export default function RobotPage() {
           </div>
         </div>
 
-        {/* CTA: link to programming */}
+        {/* PAST ROBOTS DROPDOWN section */}
+        <div className="mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-4"
+          >
+            <Archive size={16} className="text-purple-400" />
+            <span className="font-mono text-[11px] tracking-[0.3em] text-purple-400 uppercase">
+              Robot Garage
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+          >
+            Every machine we&apos;ve built.
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg text-purple-100/60 max-w-2xl mb-12"
+          >
+            Four seasons. Four robots. Click any one to see how it was built.
+          </motion.p>
+
+          <div className="space-y-3">
+            {pastRobots.map((robot, index) => {
+              const isOpen = openSeason === index;
+              return (
+                <div
+                  key={robot.season}
+                  className="rounded-lg border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black overflow-hidden hover:border-purple-500/70 transition-colors"
+                >
+                  <button
+                    onClick={() => setOpenSeason(isOpen ? null : index)}
+                    className="w-full flex items-center justify-between gap-4 p-5 lg:p-6 text-left"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="font-mono text-[10px] text-purple-500/60 tracking-wider">
+                        0{index + 1}
+                      </div>
+                      <div>
+                        <p className="font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-1">
+                          {robot.year} &middot; {robot.status.toUpperCase()}
+                        </p>
+                        <h3 className="font-display text-xl lg:text-2xl text-white">
+                          {robot.season}
+                        </h3>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      size={20}
+                      className={`text-purple-400 flex-shrink-0 transition-transform ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 lg:px-6 pb-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                          <div className="relative aspect-square rounded-lg overflow-hidden border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black">
+                            <div className="absolute inset-0 carbon-fiber" style={{ filter: "brightness(0.4)" }} />
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.25),transparent_70%)]" />
+                            <Image
+                              src={robot.image}
+                              alt={`${robot.season} robot`}
+                              fill
+                              className="object-contain p-8 relative z-10"
+                            />
+                          </div>
+                          <div>
+                            <p className="text-purple-100/70 leading-relaxed mb-5">
+                              {robot.summary}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {robot.highlights.map((h) => (
+                                <span
+                                  key={h}
+                                  className="text-[10px] font-mono px-2 py-1 rounded-full bg-purple-900/30 border border-purple-700/50 text-purple-300"
+                                >
+                                  {h}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -355,10 +474,7 @@ export default function RobotPage() {
               className="group inline-flex items-center gap-2 px-7 py-3.5 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-md transition-all hover:shadow-xl hover:shadow-purple-500/50 whitespace-nowrap"
             >
               Programming page
-              <ArrowRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform"
-              />
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </motion.div>
@@ -380,9 +496,7 @@ function SpecCard({
     <div className="p-4 rounded-md bg-purple-950/20 border border-purple-900/50 hover:border-purple-500/70 transition-colors">
       <div className="flex items-center gap-2 mb-2">
         <Icon size={14} className="text-purple-400" />
-        <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">
-          {label}
-        </span>
+        <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">{label}</span>
       </div>
       <p className="font-display text-base text-white">{value}</p>
     </div>

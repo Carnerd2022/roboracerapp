@@ -81,11 +81,11 @@ const educationPartners = [
     impact: "Equipment donated · 6-week curriculum · FLL launch",
   },
   {
-    name: "PRAGNYA — Robotics for Neurodiverse",
+    name: "Robotics for Neurodiverse Students",
     location: "Local + Virtual",
     color: "purple",
     description:
-      "Partnered with PRAGNYA to develop a 32-week neurodiverse-friendly curriculum focused on simple machines. Integrated STEAM concepts and assisted PRAGNYA in launching a nonprofit to teach software engineering to neurodiverse kids. Inspired innovative marketing ideas like the golf machine and finger skateboards.",
+      "Developed a 32-week neurodiverse-friendly curriculum focused on simple machines for an organization serving neurodiverse students. Integrated STEAM concepts, helped launch software engineering education for neurodiverse kids, and inspired innovative engineering ideas like the golf machine and finger skateboards.",
     impact: "700+ hours invested · 32-week curriculum",
   },
   {
@@ -122,7 +122,7 @@ const roboreachRegions = [
 const physicsKit = {
   title: "Physics in Motion Kit",
   description:
-    "Our innovative kit introduces children ages 5+ to basic physics concepts in a fun, hands-on way by introducing Newton's First Law. Part of the curriculum for ASPIRE, PRAGNYA, and Roboreach International.",
+    "Our innovative kit introduces children ages 5+ to basic physics concepts in a fun, hands-on way by introducing Newton's First Law. Part of the curriculum for our ASPIRE program, neurodiverse robotics partnerships, and Roboreach International.",
   components: [
     {
       label: "Motor",
@@ -705,11 +705,7 @@ export default function OutreachPage() {
             className="mt-12 p-8 rounded-xl border border-purple-900/50 bg-purple-950/20 text-center"
           >
             <Heart size={24} className="text-purple-400 mx-auto mb-3" />
-            <p className="text-lg text-purple-100/80 max-w-2xl mx-auto italic">
-              &ldquo;Through our nonprofit, RISE Foundation, we aim to be a
-              model ambassador for FIRST and help spark the next generation of
-              teams&apos; journey of STEM.&rdquo;
-            </p>
+        
           </motion.div>
         </div>
       </div>

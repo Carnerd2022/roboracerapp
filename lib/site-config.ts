@@ -16,7 +16,7 @@ export const siteConfig = {
     social: {
       instagram: "https://www.instagram.com/roboracers.16481/",
       youtube: "https://www.youtube.com/@roboracers3071",
-      email: "anaybhagavan@risefnd.org",
+      email: "roboracers@risefnd.org",
     },
   
     nav: [

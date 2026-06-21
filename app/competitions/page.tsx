@@ -427,10 +427,10 @@ function EventRow({
     >
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-2 mb-1">
             <CheckCircle2 size={14} className="text-purple-400" />
             <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">
-              {event.status.toUpperCase()}
+              COMPETED
             </span>
           </div>
           <h4 className="font-display text-lg text-white mb-1">{event.name}</h4>

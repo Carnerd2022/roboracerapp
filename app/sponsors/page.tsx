@@ -157,7 +157,7 @@ export default function SponsorsPage() {
               <div className="p-5 rounded-lg bg-black/50 border border-purple-900/50">
                 <p className="font-mono text-[10px] text-purple-400 mb-2">04 / IMPACT</p>
                 <p className="font-display text-lg text-white mb-2">Outreach programs</p>
-                <p className="text-purple-100/60 text-sm">Curriculum kits, donated equipment for SEWA, PRAGNYA, and Roboreach International.</p>
+                <p className="text-purple-100/60 text-sm">Curriculum kits, donated equipment for SEWA, neurodiverse robotics partnerships, and Roboreach International.</p>
               </div>
             </div>
           </div>

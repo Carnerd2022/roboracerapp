@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Send, ChevronDown, Building2, Handshake, Users, Sparkles, Copy, Check } from "lucide-react";
+import { Mail, MapPin, Send, ChevronDown, Building2, Handshake, Users, Sparkles, Copy, Check, Loader2 } from "lucide-react";
 
-const TEAM_EMAIL = "anaybhagavan@risefnd.org";
+const TEAM_EMAIL = "roboracers@risefnd.org";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mvzjpjvw";
 
 const contactReasons = [
   {
@@ -57,8 +58,9 @@ export default function ContactPage() {
   const [reason, setReason] = useState("General inquiry");
   const [message, setMessage] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [copied, setCopied] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const copyEmail = async () => {
     try {
@@ -66,7 +68,6 @@ export default function ContactPage() {
       setEmailCopied(true);
       setTimeout(() => setEmailCopied(false), 2000);
     } catch {
-      // Fallback if clipboard API fails
       const el = document.createElement("textarea");
       el.value = TEAM_EMAIL;
       document.body.appendChild(el);
@@ -78,39 +79,43 @@ export default function ContactPage() {
     }
   };
 
-  const copyMessage = async () => {
-    const fullMessage = `To: ${TEAM_EMAIL}
-Subject: [RoboRacers] ${reason} — ${name || "New message"}
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmitting) return;
 
-From: ${name || "(no name)"}
-Email: ${email || "(no email)"}
-Reason: ${reason}
-
-Message:
-${message || "(no message)"}`;
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
 
     try {
-      await navigator.clipboard.writeText(fullMessage);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch {
-      const el = document.createElement("textarea");
-      el.value = fullMessage;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    }
-  };
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          reason,
+          message,
+          _subject: `[RoboRacers] ${reason} — ${name || "New message"}`,
+        }),
+      });
 
-  const buildMailto = () => {
-    const subject = encodeURIComponent(`[RoboRacers] ${reason} — ${name || "New message"}`);
-    const body = encodeURIComponent(
-      `From: ${name || "(no name)"}\nEmail: ${email || "(no email)"}\nReason: ${reason}\n\nMessage:\n${message || "(no message)"}`
-    );
-    return `mailto:${TEAM_EMAIL}?subject=${subject}&body=${body}`;
+      if (response.ok) {
+        setSubmitStatus("success");
+        setName("");
+        setEmail("");
+        setReason("General inquiry");
+        setMessage("");
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -134,42 +139,25 @@ ${message || "(no message)"}`;
           Whether you want to sponsor, join, collaborate, or just say hi &mdash; we&apos;d love to hear from you. We typically reply within a few days.
         </p>
 
-        {/* Top row: contact info cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-16">
           <div className="lg:col-span-1 p-7 rounded-lg bg-gradient-to-br from-purple-950/40 to-black border border-purple-900/50">
             <div className="flex items-center gap-2 mb-4">
               <Mail size={16} className="text-purple-400" />
-              <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">
-                EMAIL US
-              </span>
+              <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">EMAIL US</span>
             </div>
-            <p className="font-display text-base text-white break-all mb-3">
-              {TEAM_EMAIL}
-            </p>
+            <p className="font-display text-base text-white break-all mb-3">{TEAM_EMAIL}</p>
             <button
               onClick={copyEmail}
               className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-md bg-purple-900/40 border border-purple-700/50 hover:bg-purple-600 hover:border-purple-400 text-purple-300 hover:text-white transition-all"
             >
-              {emailCopied ? (
-                <>
-                  <Check size={12} />
-                  COPIED
-                </>
-              ) : (
-                <>
-                  <Copy size={12} />
-                  COPY EMAIL
-                </>
-              )}
+              {emailCopied ? (<><Check size={12} />COPIED</>) : (<><Copy size={12} />COPY EMAIL</>)}
             </button>
           </div>
 
           <div className="lg:col-span-1 p-7 rounded-lg bg-gradient-to-br from-purple-950/40 to-black border border-purple-900/50">
             <div className="flex items-center gap-2 mb-4">
               <MapPin size={16} className="text-purple-400" />
-              <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">
-                BASED IN
-              </span>
+              <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">BASED IN</span>
             </div>
             <p className="font-display text-base text-white">Dublin, California</p>
             <p className="text-purple-100/60 text-sm mt-3 leading-relaxed">
@@ -180,9 +168,7 @@ ${message || "(no message)"}`;
           <div className="lg:col-span-1 p-7 rounded-lg bg-gradient-to-br from-purple-950/40 to-black border border-purple-900/50">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles size={16} className="text-purple-400" />
-              <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">
-                TEAM INFO
-              </span>
+              <span className="font-mono text-[10px] tracking-[0.2em] text-purple-400">TEAM INFO</span>
             </div>
             <p className="font-display text-base text-white">FTC Team 16481</p>
             <p className="text-purple-100/60 text-sm mt-3 leading-relaxed">
@@ -191,19 +177,13 @@ ${message || "(no message)"}`;
           </div>
         </div>
 
-        {/* Reasons */}
         <div className="mb-20">
-          <h2 className="font-display text-2xl text-white mb-6">
-            What are you reaching out about?
-          </h2>
+          <h2 className="font-display text-2xl text-white mb-6">What are you reaching out about?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {contactReasons.map((r) => {
               const Icon = r.icon;
               return (
-                <div
-                  key={r.label}
-                  className="p-5 rounded-lg bg-purple-950/20 border border-purple-900/50 hover:border-purple-500/70 transition-colors"
-                >
+                <div key={r.label} className="p-5 rounded-lg bg-purple-950/20 border border-purple-900/50 hover:border-purple-500/70 transition-colors">
                   <div className="w-10 h-10 rounded-md bg-purple-900/40 border border-purple-700/50 flex items-center justify-center mb-3">
                     <Icon size={18} className="text-purple-300" />
                   </div>
@@ -215,26 +195,20 @@ ${message || "(no message)"}`;
           </div>
         </div>
 
-        {/* Form */}
         <div className="mb-32">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-purple-500" />
-            <span className="font-mono text-[11px] tracking-[0.3em] text-purple-400 uppercase">
-              Send Us a Message
-            </span>
+            <span className="font-mono text-[11px] tracking-[0.3em] text-purple-400 uppercase">Send Us a Message</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-12">
-            Drop us a line.
-          </h2>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-12">Drop us a line.</h2>
 
-          <div className="relative rounded-xl overflow-hidden border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black p-7 lg:p-10">
+          <form onSubmit={handleSubmit} className="relative rounded-xl overflow-hidden border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black p-7 lg:p-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">
-                  YOUR NAME
-                </label>
+                <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">YOUR NAME</label>
                 <input
                   type="text"
+                  required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Jane Doe"
@@ -242,11 +216,10 @@ ${message || "(no message)"}`;
                 />
               </div>
               <div>
-                <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">
-                  YOUR EMAIL
-                </label>
+                <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">YOUR EMAIL</label>
                 <input
                   type="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
@@ -256,9 +229,7 @@ ${message || "(no message)"}`;
             </div>
 
             <div className="mb-4">
-              <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">
-                REASON
-              </label>
+              <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">REASON</label>
               <select
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
@@ -274,10 +245,9 @@ ${message || "(no message)"}`;
             </div>
 
             <div className="mb-6">
-              <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">
-                MESSAGE
-              </label>
+              <label className="block font-mono text-[10px] tracking-[0.2em] text-purple-400 mb-2">MESSAGE</label>
               <textarea
+                required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Tell us a bit about why you're reaching out..."
@@ -286,72 +256,61 @@ ${message || "(no message)"}`;
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <a
-                href={buildMailto()}
-                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-md transition-all hover:shadow-xl hover:shadow-purple-500/50"
-              >
-                <Send size={16} />
-                Open in email app
-              </a>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-purple-600 hover:bg-purple-500 disabled:bg-purple-800 disabled:cursor-not-allowed text-white font-medium rounded-md transition-all hover:shadow-xl hover:shadow-purple-500/50"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send size={16} />
+                  Send message
+                </>
+              )}
+            </button>
 
-              <button
-                onClick={copyMessage}
-                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-transparent border border-purple-500/50 hover:border-purple-400 hover:bg-purple-900/30 text-purple-100 font-medium rounded-md transition-all"
-              >
-                {copied ? (
-                  <>
-                    <Check size={16} />
-                    Copied to clipboard!
-                  </>
-                ) : (
-                  <>
-                    <Copy size={16} />
-                    Copy message
-                  </>
-                )}
-              </button>
-            </div>
-
-            <p className="mt-4 text-xs text-purple-300/50">
-              No email app? Use <strong className="text-purple-300/80">Copy message</strong> and paste it into any email you have.
-            </p>
-          </div>
+            {submitStatus === "success" && (
+              <div className="mt-5 p-4 rounded-md bg-green-500/10 border border-green-500/40">
+                <p className="text-green-300 text-sm flex items-center gap-2">
+                  <Check size={16} />
+                  Message sent! We&apos;ll get back to you soon.
+                </p>
+              </div>
+            )}
+            {submitStatus === "error" && (
+              <div className="mt-5 p-4 rounded-md bg-red-500/10 border border-red-500/40">
+                <p className="text-red-300 text-sm">
+                  Something went wrong. Please try again or email us directly at{" "}
+                  <a href={`mailto:${TEAM_EMAIL}`} className="underline">{TEAM_EMAIL}</a>.
+                </p>
+              </div>
+            )}
+          </form>
         </div>
 
-        {/* FAQ */}
         <div>
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-purple-500" />
-            <span className="font-mono text-[11px] tracking-[0.3em] text-purple-400 uppercase">
-              FAQ
-            </span>
+            <span className="font-mono text-[11px] tracking-[0.3em] text-purple-400 uppercase">FAQ</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-12">
-            Frequently asked.
-          </h2>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-12">Frequently asked.</h2>
 
           <div className="space-y-3">
             {faqs.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
-                <div
-                  key={faq.q}
-                  className="rounded-lg border border-purple-900/50 bg-purple-950/20 overflow-hidden hover:border-purple-500/70 transition-colors"
-                >
+                <div key={faq.q} className="rounded-lg border border-purple-900/50 bg-purple-950/20 overflow-hidden hover:border-purple-500/70 transition-colors">
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : index)}
                     className="w-full flex items-center justify-between gap-4 p-5 lg:p-6 text-left"
                   >
-                    <span className="font-display text-base lg:text-lg text-white">
-                      {faq.q}
-                    </span>
-                    <ChevronDown
-                      size={18}
-                      className={`text-purple-400 flex-shrink-0 transition-transform ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                    />
+                    <span className="font-display text-base lg:text-lg text-white">{faq.q}</span>
+                    <ChevronDown size={18} className={`text-purple-400 flex-shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                   </button>
                   {isOpen && (
                     <div className="px-5 lg:px-6 pb-5 lg:pb-6 -mt-1">
