@@ -72,7 +72,7 @@ const stats = [
 
 export function StatsDashboard() {
   return (
-    <section className="relative py-32 px-6 lg:px-12 overflow-hidden bg-black">
+    <section className="relative py-32 px-6 lg:px-12 overflow-hidden bg-black/50 backdrop-blur-sm">
       {/* Top divider racing stripe */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
 

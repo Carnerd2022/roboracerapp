@@ -1,4 +1,5 @@
-import { Hero } from "@/components/hero";
+import { HomeBackground } from "@/components/home-background";
+import { Hero3D } from "@/components/hero-3d";
 import { WhatIsFTC } from "@/components/what-is-ftc";
 import { RobotHighlight } from "@/components/robot-highlight";
 import { StatsDashboard } from "@/components/stats-dashboard";
@@ -8,7 +9,8 @@ import { CTASection } from "@/components/cta-section";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <HomeBackground />
+      <Hero3D />
       <WhatIsFTC />
       <RobotHighlight />
       <StatsDashboard />

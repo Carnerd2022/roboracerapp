@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
@@ -9,6 +9,15 @@ import { siteConfig } from "@/lib/site-config";
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Falls back to the "RR" badge until public/logo/logo.png exists
+  const [logoOk, setLogoOk] = useState(true);
+  const logoRef = useRef<HTMLImageElement>(null);
+
+  // The <img> can 404 before React hydration attaches onError, so re-check on mount
+  useEffect(() => {
+    const el = logoRef.current;
+    if (el && el.complete && el.naturalWidth === 0) setLogoOk(false);
+  }, []);
 
   // Detect scroll for navbar background blur
   useEffect(() => {
@@ -31,8 +40,22 @@ export function Navbar() {
         {/* Logo / Team Name */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative">
-            <div className="w-9 h-9 bg-gradient-to-br from-purple-500 to-purple-800 rounded-md flex items-center justify-center font-mono font-bold text-sm group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-shadow">
-              RR
+            <div className="w-9 h-9 rounded-md overflow-hidden flex items-center justify-center group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-shadow">
+              {logoOk ? (
+                // Drop your logo at public/logo/logo.png — see the README there.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  ref={logoRef}
+                  src="/logo/logo.png"
+                  alt={`${siteConfig.teamName} logo`}
+                  className="w-full h-full object-contain"
+                  onError={() => setLogoOk(false)}
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-purple-500 to-purple-800 flex items-center justify-center font-mono font-bold text-sm">
+                  RR
+                </div>
+              )}
             </div>
             <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
           </div>
