@@ -48,16 +48,16 @@ const teamStats = [
 // Team roster — replace names, roles, and bios with real ones
 // Then later we can swap the User icon for real photos
 const teamMembers = [
-  { name: "Kamal", image: "/team/Kamal.png", role: "Mechanical" },
-  { name: "Zain", image: "/team/Zain.png", role: "Software" },
-  { name: "Anay", image: "/team/Anay.png", role: "Mechanical" },
-  { name: "Surya", image: "/team/Surya.png", role: "Mechanical" },
-  { name: "Siva", image: "/team/Siva.png", role: "Mechanical" },
-  { name: "Mithilessh", image: "/team/Mithilessh.png", role: "Software" },
-  { name: "Sashank", image: "/team/Sashank.png", role: "Mechanical" },
-  { name: "Shreesh", image: "/team/Shreesh.png", role: "Software" },
-  { name: "Ishaan", image: "/team/Ishaan.png", role: "Software" },
-  { name: "Vivaan", image: "/team/Vivaan.png", role: "Software" },
+  { name: "Kamal", image: "/team/Kamal-v2.png", role: "Mechanical" },
+  { name: "Zain", image: "/team/Zain-v2.png", role: "Software" },
+  { name: "Anay", image: "/team/Anay-v2.png", role: "Mechanical" },
+  { name: "Surya", image: "/team/Surya-v2.png", role: "Mechanical" },
+  { name: "Siva", image: "/team/Siva-v2.png", role: "Mechanical" },
+  { name: "Mithilessh", image: "/team/Mithilessh-v2.png", role: "Software" },
+  { name: "Sashank", image: "/team/Sashank-v2.png", role: "Mechanical" },
+  { name: "Shreesh", image: "/team/Shreesh-v2.png", role: "Software" },
+  { name: "Ishaan", image: "/team/Ishaan-v2.png", role: "Software" },
+  { name: "Vivaan", image: "/team/Vivaan-v2.png", role: "Software" },
   { name: "Aryan", image: null, role: "Mechanical" },
   { name: "Arhan", image: null, role: "Software" },
   { name: "Soorya", image: null, role: "Software" },
@@ -68,13 +68,13 @@ const mechanicalMembers = teamMembers.filter((m) => m.role === "Mechanical");
 const softwareMembers = teamMembers.filter((m) => m.role === "Software");
 
 const mentors = [
-  { name: "Arya", image: "/team/Arya.png" },
-  { name: "Vikram", image: "/team/Vikram.png" },
+  { name: "Arya", image: "/team/Arya-v2.png" },
+  { name: "Vikram", image: "/team/Vikram-v2.png" },
 ];
 
 const coaches = [
-  { name: "Coach Ramana", image: "/team/coach-ramana.png" },
-  { name: "Coach Sundar", image: "/team/coach-sundar.png" },
+  { name: "Coach Ramana", image: "/team/coach-ramana-v2.png" },
+  { name: "Coach Sundar", image: "/team/coach-sundar-v2.png" },
 ];
 
 // Pit-lane rail: sections a visitor can jump between while reading
@@ -274,9 +274,15 @@ function PersonCard({
         fixedWidth ? "w-full" : ""
       }`}
     >
-      <div className="relative w-full aspect-square bg-gradient-to-br from-purple-700 to-purple-950 border-b border-purple-700/50 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full aspect-[3/4] bg-gradient-to-br from-purple-700 to-purple-950 border-b border-purple-700/50 flex items-center justify-center overflow-hidden">
         {member.image ? (
-          <Image src={member.image} alt={member.name} fill className="object-cover" />
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover object-top"
+          />
         ) : (
           <>
             <div className="absolute inset-0 carbon-fiber opacity-15" />
