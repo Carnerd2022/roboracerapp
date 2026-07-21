@@ -7,26 +7,10 @@ import { siteConfig } from "@/lib/site-config";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black flex items-center">
-      {/* Carbon fiber panel on the right side */}
-      <div className="absolute top-0 right-0 h-full w-1/2 hidden lg:block">
-        <div
-          className="absolute inset-0 carbon-fiber"
-          style={{ filter: "brightness(0.7)" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "rgba(147, 51, 234, 0.18)",
-            mixBlendMode: "color",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/60" />
-        <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent" />
-      </div>
-
-      {/* Engineering grid background overlay on the left */}
-      <div className="absolute inset-0 grid-bg opacity-50 lg:[clip-path:inset(0_50%_0_0)]" />
+    <section className="relative min-h-screen w-full overflow-hidden flex items-center">
+      {/* Transparent so the F1 build scene shows through; scrims keep the copy legible */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#07050d] via-[#07050d]/55 to-transparent" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#07050d]/60 via-transparent to-transparent" />
 
       {/* Purple ambient glow in the bottom-left */}
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] pointer-events-none">

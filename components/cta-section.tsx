@@ -39,7 +39,7 @@ export function CTASection() {
     <section className="relative py-32 px-6 lg:px-12 overflow-hidden">
       {/* Carbon fiber backdrop */}
       <div className="absolute inset-0 carbon-fiber opacity-10" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05030a]/60 via-purple-950/20 to-[#05030a]/85" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#07050d]/60 via-purple-950/20 to-[#07050d]/85" />
 
       {/* Top racing stripe accent */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
