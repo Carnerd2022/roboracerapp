@@ -2,27 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Handshake, Heart, Sparkles, Mail, ArrowRight } from "lucide-react";
-import { siteConfig } from "@/lib/site-config";
-
-const sponsors = [
-  { name: "Citrix", logo: "/sponsors/citrix.png" },
-  { name: "Salesforce", logo: "/sponsors/salesforce.png" },
-  { name: "Eclat Prime", logo: "/sponsors/eclat-prime.png" },
-  { name: "RISE Foundation", logo: "/sponsors/rise-foundation.png" },
-  { name: "Visa", logo: "/sponsors/visa.png" },
-  { name: "Altair", logo: "/sponsors/altair.png" },
-  { name: "Costco", logo: "/sponsors/costco.png" },
-  { name: "PG&E", logo: "/sponsors/pge.png" },
-  { name: "Quantum Robotics", logo: "/sponsors/quantum-robotics.png" },
-  { name: "NVIDIA", logo: "/sponsors/nvidia.png" },
-  { name: "Prusa Research", logo: "/sponsors/prusa-research.png" },
-  { name: "Automation Anywhere", logo: "/sponsors/automation-anywhere.png" },
-  { name: "GoBilda", logo: "/sponsors/gobilda.png" },
-  { name: "Walmart Labs", logo: "/sponsors/walmart-labs.png" },
-  { name: "KLA", logo: "/sponsors/kla.png" },
-  { name: "Polymaker", logo: "/sponsors/polymaker.png" },
-];
+import { Handshake, Heart, Sparkles, ArrowRight } from "lucide-react";
+import { sponsors } from "@/lib/sponsors";
 
 export default function SponsorsPage() {
   return (
@@ -57,11 +38,8 @@ export default function SponsorsPage() {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {sponsors.map((sponsor) => (
-              <div
-                key={sponsor.name}
-                className="relative h-[140px] rounded-lg border border-purple-900/50 bg-white/95 flex items-center justify-center p-6 hover:border-purple-500 hover:bg-white hover:shadow-xl hover:shadow-purple-500/20 transition-all group"
-              >
+            {sponsors.map((sponsor) => {
+              const inner = (
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image
                     src={sponsor.logo}
@@ -71,8 +49,26 @@ export default function SponsorsPage() {
                     sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
                 </div>
-              </div>
-            ))}
+              );
+              const tileClass =
+                "relative h-[140px] rounded-xl border border-purple-900/40 bg-white flex items-center justify-center p-6 transition-all hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/20";
+              return sponsor.url ? (
+                <a
+                  key={sponsor.name}
+                  href={sponsor.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${sponsor.name}`}
+                  className={tileClass}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={sponsor.name} className={tileClass}>
+                  {inner}
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -174,19 +170,12 @@ export default function SponsorsPage() {
               Help us build the next robot, mentor more students, and put RISE Foundation&apos;s mission on more stages.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={`mailto:${siteConfig.social.email}?subject=Sponsorship%20Inquiry`}
+              <Link
+                href="/contact#contact"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-purple-900 hover:bg-purple-50 font-medium rounded-md transition-all"
               >
-                <Mail size={18} />
                 Contact our team
                 <ArrowRight size={18} />
-              </a>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-transparent border border-white/40 hover:border-white text-white font-medium rounded-md transition-all"
-              >
-                See contact page
               </Link>
             </div>
           </div>

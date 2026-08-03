@@ -6,7 +6,7 @@
 @theme inline {
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains);
-  --font-display: var(--font-orbitron);
+  --font-display: var(--font-display-src);
 }
 
 :root {

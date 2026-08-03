@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Orbitron } from "next/font/google";
+import { Inter, JetBrains_Mono, Chakra_Petch } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -17,9 +17,10 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const orbitron = Orbitron({
+const chakraPetch = Chakra_Petch({
   subsets: ["latin"],
-  variable: "--font-orbitron",
+  weight: ["500", "600", "700"],
+  variable: "--font-display-src",
   display: "swap",
 });
 
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${orbitron.variable} dark`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${chakraPetch.variable} dark`}
     >
       <body className="min-h-screen bg-black text-white antialiased" suppressHydrationWarning>
         <Navbar />

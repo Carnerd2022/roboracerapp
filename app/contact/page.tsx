@@ -195,7 +195,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="mb-32">
+        <div id="contact" className="mb-32 scroll-mt-28">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-purple-500" />
             <span className="font-mono text-[11px] tracking-[0.3em] text-purple-400 uppercase">Send Us a Message</span>

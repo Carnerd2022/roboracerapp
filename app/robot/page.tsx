@@ -82,7 +82,7 @@ const pastRobots = [
   {
     season: "DECODE",
     year: "2025-2026",
-    image: "/robots/decode.png",
+    image: "/decode.png",
     status: "Current Season",
     summary:
       "Our DECODE robot features 5 custom subsystems — adjustable deposit hood, ball-bearing turret, high-capacity intake, sub-second transfer, and a vectoring system for smart artifact routing.",
@@ -91,7 +91,7 @@ const pastRobots = [
   {
     season: "INTO THE DEEP",
     year: "2024-2025",
-    image: "/robots/into-the-deep.png",
+    image: "/into.png",
     status: "Past Season",
     summary:
       "Our INTO THE DEEP robot focused on sample collection and specimen scoring. Built around a precise scoring arm and a fast intake system that could handle both game pieces seamlessly.",
@@ -165,16 +165,15 @@ export default function RobotPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className="relative aspect-[16/10] lg:aspect-[16/8] rounded-xl overflow-hidden border border-purple-900/50 mb-20"
+          className="relative aspect-[16/10] lg:aspect-[16/8] rounded-xl overflow-hidden border border-purple-900/50 mb-20 bg-black"
         >
-          <div className="absolute inset-0 carbon-fiber" style={{ filter: "brightness(0.4)" }} />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.3),transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.18),transparent_70%)]" />
 
           <Image
-            src="/robot-render.png"
-            alt="DECODE CAD render"
+            src="/decode.png"
+            alt="DECODE robot"
             fill
-            className="object-contain p-12 relative z-10"
+            className="object-contain p-4 relative z-10"
             priority
           />
 
@@ -412,14 +411,13 @@ export default function RobotPage() {
                         className="overflow-hidden"
                       >
                         <div className="px-5 lg:px-6 pb-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                          <div className="relative aspect-square rounded-lg overflow-hidden border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black">
-                            <div className="absolute inset-0 carbon-fiber" style={{ filter: "brightness(0.4)" }} />
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.25),transparent_70%)]" />
+                          <div className="relative aspect-square rounded-lg overflow-hidden border border-purple-900/50 bg-black">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.18),transparent_70%)]" />
                             <Image
                               src={robot.image}
                               alt={`${robot.season} robot`}
                               fill
-                              className="object-contain p-8 relative z-10"
+                              className="object-contain p-4 relative z-10"
                             />
                           </div>
                           <div>

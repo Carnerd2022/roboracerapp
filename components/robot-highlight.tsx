@@ -48,20 +48,16 @@ export function RobotHighlight() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
-            className="relative aspect-square rounded-lg overflow-hidden border border-purple-900/50 bg-gradient-to-br from-purple-950/30 to-black"
+            className="relative aspect-square rounded-lg overflow-hidden border border-purple-900/50 bg-black"
           >
-            <div
-              className="absolute inset-0 carbon-fiber"
-              style={{ filter: "brightness(0.4)" }}
-            />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.3),transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.18),transparent_70%)]" />
 
-            {/* Robot render — replace placeholder when you add public/robot-render.png */}
+            {/* Current-season DECODE robot */}
             <Image
-              src="/robot-render.png"
+              src="/decode.png"
               alt="Our DECODE robot"
               fill
-              className="object-contain p-12 relative z-10"
+              className="object-contain p-4 relative z-10"
               priority
             />
 

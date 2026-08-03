@@ -24,7 +24,7 @@ export const siteConfig = {
       { name: "Robot", href: "/robot" },
       { name: "Programming", href: "/programming" },
       { name: "Outreach", href: "/outreach" },
-      { name: "Competitions", href: "/competitions" },
+      { name: "Awards", href: "/awards" },
       { name: "Sponsors", href: "/sponsors" },
       { name: "Resources", href: "/resources" },
       { name: "Blog", href: "/blog" },

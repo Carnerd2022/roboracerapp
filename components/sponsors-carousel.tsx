@@ -4,26 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-// Each sponsor has a name + the logo file in public/sponsors/
-const sponsors = [
-  { name: "Citrix", logo: "/sponsors/citrix.png" },
-  { name: "Salesforce", logo: "/sponsors/salesforce.png" },
-  { name: "Eclat Prime", logo: "/sponsors/eclat-prime.png" },
-  { name: "RISE Foundation", logo: "/sponsors/rise-foundation.png" },
-  { name: "Visa", logo: "/sponsors/visa.png" },
-  { name: "Altair", logo: "/sponsors/altair.png" },
-  { name: "Costco", logo: "/sponsors/costco.png" },
-  { name: "PG&E", logo: "/sponsors/pge.png" },
-  { name: "Quantum Robotics", logo: "/sponsors/quantum-robotics.png" },
-  { name: "NVIDIA", logo: "/sponsors/nvidia.png" },
-  { name: "Prusa Research", logo: "/sponsors/prusa-research.png" },
-  { name: "Automation Anywhere", logo: "/sponsors/automation-anywhere.png" },
-  { name: "GoBilda", logo: "/sponsors/gobilda.png" },
-  { name: "Walmart Labs", logo: "/sponsors/walmart-labs.png" },
-  { name: "KLA", logo: "/sponsors/kla.png" },
-  { name: "Polymaker", logo: "/sponsors/polymaker.png" },
-];
+import { sponsors } from "@/lib/sponsors";
 
 export function SponsorsCarousel() {
   const looped = [...sponsors, ...sponsors];
@@ -73,22 +54,37 @@ export function SponsorsCarousel() {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
         <div className="flex gap-4 animate-scroll">
-          {looped.map((sponsor, index) => (
-            <div
-              key={`${sponsor.name}-${index}`}
-              className="flex-shrink-0 w-[240px] h-[120px] rounded-lg border border-purple-900/50 bg-white/95 flex items-center justify-center px-8 hover:border-purple-500 hover:bg-white transition-all group"
-            >
+          {looped.map((sponsor, index) => {
+            const Tile = (
               <div className="relative w-full h-full flex items-center justify-center">
                 <Image
                   src={sponsor.logo}
                   alt={sponsor.name}
                   fill
-                  className="object-contain p-4"
+                  className="object-contain p-2"
                   sizes="240px"
                 />
               </div>
-            </div>
-          ))}
+            );
+            const tileClass =
+              "flex-shrink-0 w-[240px] h-[120px] rounded-xl border border-purple-900/40 bg-white flex items-center justify-center p-6 transition-all hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/20";
+            return sponsor.url ? (
+              <a
+                key={`${sponsor.name}-${index}`}
+                href={sponsor.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit ${sponsor.name}`}
+                className={tileClass}
+              >
+                {Tile}
+              </a>
+            ) : (
+              <div key={`${sponsor.name}-${index}`} className={tileClass}>
+                {Tile}
+              </div>
+            );
+          })}
         </div>
       </div>
 
