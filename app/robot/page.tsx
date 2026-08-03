@@ -109,7 +109,7 @@ const pastRobots = [
   {
     season: "POWER PLAY",
     year: "2022-2023",
-    image: "/robots/power-play.png",
+    image: "/power.png",
     status: "Past Season",
     summary:
       "Our POWER PLAY robot was built for vertical reach and cone manipulation. Took home Finalist Alliance Captain and the Inspire Award at the East Bay League Tournament that season.",
