@@ -20,8 +20,8 @@ export const sponsors: Sponsor[] = [
   { name: "NVIDIA", logo: "/sponsors/nvidia-v2.png", url: "https://www.nvidia.com" },
   { name: "Prusa Research", logo: "/sponsors/prusa-research-v2.png", url: "https://www.prusa3d.com" },
   { name: "Automation Anywhere", logo: "/sponsors/automation-anywhere-v2.png", url: "https://www.automationanywhere.com" },
-  { name: "GoBilda", logo: "/sponsors/gobilda.png", url: "https://www.gobilda.com" },
-  { name: "Walmart Labs", logo: "/sponsors/walmart-labs.png", url: "https://www.walmart.com" },
+  { name: "GoBilda", logo: "/sponsors/gobilda-v2.png", url: "https://www.gobilda.com" },
+  { name: "Walmart Labs", logo: "/sponsors/walmart-labs-v2.png", url: "https://www.walmart.com" },
   { name: "KLA", logo: "/sponsors/kla-v2.png", url: "https://www.kla.com" },
   { name: "Polymaker", logo: "/sponsors/polymaker-v2.png", url: "https://www.polymaker.com" },
 ];
