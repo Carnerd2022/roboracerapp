@@ -58,7 +58,7 @@ const teamMembers = [
   { name: "Shreesh", image: "/team/Shreesh-v2.png", role: "Software" },
   { name: "Ishaan", image: "/team/Ishaan-v2.png", role: "Software" },
   { name: "Vivaan", image: "/team/Vivaan-v2.png", role: "Software" },
-  { name: "Aryan", image: null, role: "Mechanical" },
+  { name: "Aryan", image: "/team/Aryan-v2.png", role: "Mechanical" },
   { name: "Arhan", image: null, role: "Software" },
   { name: "Soorya", image: null, role: "Software" },
   { name: "Prasham", image: null, role: "Software" },
