@@ -16,7 +16,7 @@ export const sponsors: Sponsor[] = [
   { name: "Altair", logo: "/sponsors/altair-v2.png", url: "https://www.altair.com" },
   { name: "Costco", logo: "/sponsors/costco-v2.png", url: "https://www.costco.com" },
   { name: "PG&E", logo: "/sponsors/pge.png", url: "https://www.pge.com" },
-  { name: "Quantum Robotics", logo: "/sponsors/quantum-robotics.png", url: null },
+  { name: "Quantum Robotics", logo: "/sponsors/quantum-robotics.png", url: "https://quantum-robotics.ai" },
   { name: "NVIDIA", logo: "/sponsors/nvidia-v2.png", url: "https://www.nvidia.com" },
   { name: "Prusa Research", logo: "/sponsors/prusa-research-v2.png", url: "https://www.prusa3d.com" },
   { name: "Automation Anywhere", logo: "/sponsors/automation-anywhere-v2.png", url: "https://www.automationanywhere.com" },
