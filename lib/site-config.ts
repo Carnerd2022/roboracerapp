@@ -1,6 +1,7 @@
 export const siteConfig = {
     teamName: "RoboRacers",
     teamNumber: "16481",
+    url: "https://roboracers.org",
     tagline: "It's about the race, not the finish line.",
   
     description:
