@@ -28,7 +28,7 @@ export const siteConfig = {
       { name: "Awards", href: "/awards" },
       { name: "Sponsors", href: "/sponsors" },
       { name: "Resources", href: "/resources" },
-      { name: "Blog", href: "/blog" },
+      { name: "Fundraiser", href: "/fundraiser" },
       { name: "Contact", href: "/contact" },
     ],
   } as const;

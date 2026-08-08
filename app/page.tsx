@@ -1,5 +1,6 @@
 import { F1BuildBackground } from "@/components/f1-build-background";
 import { Hero } from "@/components/hero";
+import { FundraiserBanner } from "@/components/fundraiser-banner";
 import { WhatIsFTC } from "@/components/what-is-ftc";
 import { RobotHighlight } from "@/components/robot-highlight";
 import { StatsDashboard } from "@/components/stats-dashboard";
@@ -11,6 +12,7 @@ export default function Home() {
     <>
       <F1BuildBackground />
       <Hero />
+      <FundraiserBanner />
       <WhatIsFTC />
       <RobotHighlight />
       <StatsDashboard />
