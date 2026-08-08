@@ -44,7 +44,7 @@ export function SponsorsCarousel() {
             className="text-purple-100/60 max-w-md"
           >
             Every great race team has a great pit crew. Huge thanks to the
-            16 sponsors making our season possible.
+            17 sponsors making our season possible.
           </motion.p>
         </div>
       </div>

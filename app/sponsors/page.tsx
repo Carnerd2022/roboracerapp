@@ -23,7 +23,7 @@ export default function SponsorsPage() {
         </h1>
 
         <p className="text-lg lg:text-xl text-purple-100/70 max-w-3xl leading-relaxed mb-16">
-          Every championship robot is built by a great pit crew. Ours is 16 companies strong - from Fortune 500 tech leaders to specialized manufacturers, all helping us build, code, and compete at our highest level. Funding is coordinated through our nonprofit, RISE Foundation.
+          Every championship robot is built by a great pit crew. Ours is 17 companies strong - from Fortune 500 tech leaders to specialized manufacturers, all helping us build, code, and compete at our highest level. Funding is coordinated through our nonprofit, RISE Foundation.
         </p>
 
         <div className="mb-32">
@@ -34,7 +34,7 @@ export default function SponsorsPage() {
             </span>
           </div>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-12">
-            16 partners. One mission.
+            17 partners. One mission.
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">

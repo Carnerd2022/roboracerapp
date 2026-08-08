@@ -732,7 +732,7 @@ export default function AboutPage() {
                 Every season, our team takes on a new challenge from FIRST, designs and builds a robot from scratch, codes its autonomous behaviors in Java, and competes against teams across California and beyond. Win or lose, every match is a chance to learn something new.
               </p>
               <p>
-                We&apos;re proudly backed by 16 industry sponsors and run through the{" "}
+                We&apos;re proudly backed by 17 industry sponsors and run through the{" "}
                 <span className="text-purple-300 font-medium">RISE Foundation</span>{" "}
                 — every dollar goes back into the team, the robot, and the next generation of engineers.
               </p>

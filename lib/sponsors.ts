@@ -24,4 +24,5 @@ export const sponsors: Sponsor[] = [
   { name: "Walmart Labs", logo: "/sponsors/walmart-labs-v2.png", url: "https://www.walmart.com" },
   { name: "KLA", logo: "/sponsors/kla-v2.png", url: "https://www.kla.com" },
   { name: "Polymaker", logo: "/sponsors/polymaker-v2.png", url: "https://www.polymaker.com" },
+  { name: "Fabworks", logo: "/sponsors/fabworks.png", url: "https://www.fabworks.com/" },
 ];
