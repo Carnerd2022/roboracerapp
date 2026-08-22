@@ -292,12 +292,6 @@ function PersonCard({
           </>
         )}
 
-        <div className="absolute top-3 right-3 z-10 px-2 py-1 rounded bg-black/60 backdrop-blur-sm border border-purple-400/40">
-          <span className="font-mono text-[10px] text-purple-200 tracking-wider">
-            #{String(index + 1).padStart(2, "0")}
-          </span>
-        </div>
-
         <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-purple-300/60 z-10" />
         <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-purple-300/60 z-10" />
       </div>
