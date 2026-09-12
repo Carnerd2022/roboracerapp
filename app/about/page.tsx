@@ -52,7 +52,6 @@ const teamMembers = [
   { name: "Zain", image: "/team/Zain-v2.png", role: "Software" },
   { name: "Anay", image: "/team/Anay-v2.png", role: "Mechanical" },
   { name: "Surya", image: "/team/Surya-v2.png", role: "Mechanical" },
-  { name: "Siva", image: "/team/Siva-v2.png", role: "Mechanical" },
   { name: "Mithilessh", image: "/team/Mithilessh-v2.png", role: "Software" },
   { name: "Sashank", image: "/team/Sashank-v2.png", role: "Mechanical" },
   { name: "Shreesh", image: "/team/Shreesh-v2.png", role: "Software" },
